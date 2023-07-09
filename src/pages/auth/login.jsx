@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { filterEmail } from "../../config/filterInput";
 
-const Login = () => {
+const Login = ({setUserToken}) => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     email: "",
@@ -15,16 +15,18 @@ const Login = () => {
   };
   const formSubmit = (e) => {
     e.preventDefault();
-    if (!userData.email || userData.email.length < 4)
-      return toast.error("Email is invalid");
     if (
-      !userData.password ||
-      userData.password.length < 6 ||
+      !userData.email ||
+      userData.email.length < 4 ||
       !filterEmail.test(userData.email)
     )
+      return toast.error("Email is invalid");
+    if (!userData.password || userData.password.length < 6)
       return toast.error("Password is invalid");
-    // window.localStorage.setItem("userAuthTokin");
-    navigate("/chat");
+    
+    window.localStorage.setItem("authToken", userData.email);
+    setUserToken(userData.email)
+    navigate("/");
   };
   return (
     <>

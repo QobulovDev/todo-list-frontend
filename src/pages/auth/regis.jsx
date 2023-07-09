@@ -38,7 +38,7 @@ const Regis = ({setUserToken}) => {
     //         toast.error(respons.data);
     //     }else{
     //         const token = respons.headers.get('x-auth-token'); 
-    //         window.localStorage.setItem("userAuthTokin", token);
+    //         window.localStorage.setItem("authToken", token);
     //         setUserToken(token)
     //         navigate("/home");
     //     }

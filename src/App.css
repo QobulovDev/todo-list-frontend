@@ -1,0 +1,16 @@
+.category .nav .active {
+    background-color: rgb(0, 0, 255); 
+    color: #fff;
+    border-radius: 10px;
+}
+.category {
+    border-bottom: 2px solid #000; 
+}
+
+.table-item {
+    border-radius: 6px;
+}
+.profil-img{
+    width: 45px;
+    height: 45px;
+}
