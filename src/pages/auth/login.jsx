@@ -3,8 +3,10 @@ import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { filterEmail } from "../../config/filterInput";
+import axios from "axios";
 
-const Login = ({setUserToken}) => {
+// eslint-disable-next-line react/prop-types
+const Login = ({ setUserToken, setUser }) => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     email: "",
@@ -13,7 +15,7 @@ const Login = ({setUserToken}) => {
   const inputHandler = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
-  const formSubmit = (e) => {
+  const formSubmit = async (e) => {
     e.preventDefault();
     if (
       !userData.email ||
@@ -23,10 +25,40 @@ const Login = ({setUserToken}) => {
       return toast.error("Email is invalid");
     if (!userData.password || userData.password.length < 6)
       return toast.error("Password is invalid");
-    
-    window.localStorage.setItem("authToken", userData.email);
-    setUserToken(userData.email)
-    navigate("/");
+
+    const config = {
+      method: "post",
+      url: `http://localhost:5500/api/auth`,
+      // url : `https://todo-list-19zv.onrender.com/api/auth`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify({
+        email: userData.email,
+        password: userData.password,
+      }),
+    };
+
+    try {
+      await axios(config)
+        .then((res) => {
+          if (res.status === 200) {
+            const token = res.data.authToken;
+            localStorage.setItem("authToken", token);
+            setUser({
+              userId: res.data._id,
+              name: res.data.name
+            })
+            setUserToken(token);
+            navigate("/");
+          }
+        })
+        .catch((err) => {
+          toast.error(err.response.data);
+        });
+    } catch (error) {
+      toast.error(error);
+    }
   };
   return (
     <>

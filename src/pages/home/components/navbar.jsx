@@ -1,12 +1,28 @@
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import profilImg from "../../../assets/profil.png";
-const Navbar = () => {
-    return (
-        <>
-            <nav className="bg-light py-2">
+
+const Navbar = (props) => {
+  // eslint-disable-next-line react/prop-types
+  const {setUser, user, setUserToken} = props;
+  const navigate = useNavigate()
+  const logout = ()=>{
+    setUser({})
+    localStorage.removeItem('authToken')
+    setUserToken("")
+    navigate("/login");
+  }
+  return (
+    <>
+      <nav className="bg-light py-2">
         <div className="container">
           <div className="d-flex justify-content-between">
             <h2 className="logo pt-2">
-              <a href="/" className="text-dark" style={{textDecoration: 'none'}}>
+              <a
+                href="/"
+                className="text-dark"
+                style={{ textDecoration: "none" }}
+              >
                 <i className="bi bi-list-check"></i> TODO list
               </a>
             </h2>
@@ -31,9 +47,9 @@ const Navbar = () => {
               aria-labelledby="offcanvasRightLabel"
             >
               <div className="offcanvas-header">
-                <h5 className="offcanvas-title" id="offcanvasRightLabel">
-                  Profil
-                </h5>
+                <h3 className="offcanvas-title" id="offcanvasRightLabel">
+                  {user?.name}
+                </h3>
                 <button
                   type="button"
                   className="btn-close"
@@ -42,27 +58,24 @@ const Navbar = () => {
                 ></button>
               </div>
               <div className="offcanvas-body">
-              <ul className="list-group list-group-flush">
-                <li className="list-group-item">
-                  <a href="/">Profil</a>
-                </li>
-                <li className="list-group-item">
-                  <a href="/">Setting</a>
-                </li>
-                <li className="list-group-item">
-                  <a href="/">Reset password</a>
-                </li>
-                <li className="list-group-item">
-                  <a href="/">Log out</a>
-                </li>
-              </ul> 
+                <ul className="list-group list-group-flush">
+                  <li className="list-group-item">
+                    <Link to='/pofil'>Profil</Link>
+                  </li>
+                  <li className="list-group-item">
+                    <Link to='/pofil'>Setting</Link>
+                  </li>
+                  <li className="list-group-item" onClick={logout}>
+                    <a href="/">Log out</a>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
       </nav>
-        </>
-    );
-}
+    </>
+  );
+};
 
 export default Navbar;
