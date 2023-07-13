@@ -1,7 +1,7 @@
 const Edit = () => {
-    return (
-        <>
-            <div
+  return (
+    <>
+      <div
         className="modal fade"
         id="exampleModal"
         tabIndex="-1"
@@ -22,28 +22,52 @@ const Edit = () => {
               ></button>
             </div>
             <div className="modal-body">
-            <form>
-              <div className="mb-3">
-                <label htmlFor="name" className="form-label">Name</label>
-                <input type="text" className="form-control" id="name" placeholder="todo name"/>
-              </div>
-              <div className="mb-3">
-                <label htmlFor="status" className="form-label">Status</label>
-                <select className="form-select" id="status">
-                  <option value="1">Complate</option>
-                  <option value="2">ToDo</option>
-                  <option value="3">Fail</option>
-                </select>
-              </div>
-              <div className="mb-3">
-                <label htmlFor="didline" className="form-label">Didline</label>
-                <input type="date" name="didline" id="didline" className="form-control"/>
-              </div>
-              <div className="mb-3">
-                <label htmlFor="subitem" className="form-label">Comment</label>
-                <input type="text" name="subitem" id="subitem" className="form-control" placeholder="comment"/>
-              </div>
-            </form>
+              <form>
+                <div className="mb-3">
+                  <label htmlFor="name" className="form-label">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    placeholder="todo name"
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="status" className="form-label">
+                    Status
+                  </label>
+                  <select className="form-select" id="status">
+                    <option value="1">Complate</option>
+                    <option value="2">ToDo</option>
+                    <option value="3">Fail</option>
+                  </select>
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="didline" className="form-label">
+                    Didline
+                  </label>
+                  <input
+                    type="date"
+                    name="didline"
+                    id="didline"
+                    className="form-control"
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="subitem" className="form-label">
+                    Discraption
+                  </label>
+                  <input
+                    type="text"
+                    name="subitem"
+                    id="subitem"
+                    className="form-control"
+                    placeholder="Discraption"
+                  />
+                </div>
+              </form>
             </div>
             <div className="modal-footer">
               <button
@@ -60,8 +84,8 @@ const Edit = () => {
           </div>
         </div>
       </div>
-        </>
-    );
-}
+    </>
+  );
+};
 
 export default Edit;

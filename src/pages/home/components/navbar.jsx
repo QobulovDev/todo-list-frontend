@@ -9,6 +9,7 @@ const Navbar = (props) => {
   const logout = ()=>{
     setUser({})
     localStorage.removeItem('authToken')
+    localStorage.removeItem('userId')
     setUserToken("")
     navigate("/login");
   }

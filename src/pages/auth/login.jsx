@@ -45,6 +45,7 @@ const Login = ({ setUserToken, setUser }) => {
           if (res.status === 200) {
             const token = res.data.authToken;
             localStorage.setItem("authToken", token);
+            localStorage.setItem('userId', res.data._id);
             setUser({
               userId: res.data._id,
               name: res.data.name
