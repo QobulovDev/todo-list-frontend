@@ -1,24 +1,33 @@
-const Edit = () => {
+import { useState } from "react";
+
+const Edit = (props) => {
+  const {editItem, setEditItem} = props;
+  if(!editItem) return <></>
+  const [todoItem, setTodoItem] = useState({
+    name: editItem.name,
+    status: editItem.status,
+    didline: editItem.didline,
+    subitem: editItem.subitem
+  })
+  const inputHandler = (e) =>{
+    setTodoItem({...todoItem, [e.target.name]: e.target.value})
+  }
+  const closeWin = ()=>{
+    setEditItem("")
+  }
   return (
     <>
-      <div
-        className="modal fade"
-        id="exampleModal"
-        tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="false"
-      >
-        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div className="modal d-block" tabIndex="-1">
+        <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">
-                Edit todo
-              </h1>
+              <h5 className="modal-title"> Edit todo</h5>
               <button
                 type="button"
                 className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
+                onClick={closeWin}
               ></button>
             </div>
             <div className="modal-body">
@@ -32,16 +41,20 @@ const Edit = () => {
                     className="form-control"
                     id="name"
                     placeholder="todo name"
+                    name="name"
+                    value={todoItem.name}
+                    onChange={inputHandler}
                   />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="status" className="form-label">
                     Status
                   </label>
-                  <select className="form-select" id="status">
-                    <option value="1">Complate</option>
-                    <option value="2">ToDo</option>
-                    <option value="3">Fail</option>
+                  <select className="form-select" id="status" name="status" onChange={inputHandler} defaultValue={todoItem.status}>
+                    <option value="none">None</option>
+                    <option value="complate">Complate</option>
+                    <option value="todo">ToDo</option>
+                    <option value="fail">Fail</option>
                   </select>
                 </div>
                 <div className="mb-3">
@@ -53,6 +66,8 @@ const Edit = () => {
                     name="didline"
                     id="didline"
                     className="form-control"
+                    value={new Date(todoItem.didline).toISOString().substr(0, 10)}
+                    onChange={inputHandler}
                   />
                 </div>
                 <div className="mb-3">
@@ -65,6 +80,8 @@ const Edit = () => {
                     id="subitem"
                     className="form-control"
                     placeholder="Discraption"
+                    value={todoItem.subitem}
+                    onChange={inputHandler}
                   />
                 </div>
               </form>
@@ -74,6 +91,7 @@ const Edit = () => {
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
+                onClick={closeWin}
               >
                 Close
               </button>

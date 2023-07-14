@@ -17,7 +17,6 @@ const AddWindow = ({ category, setCategory, addWin, setAddWin, getData }) => {
             ...addTodo,
             [e.target.name]: e.target.value
         })
-        console.log(addTodo);
     }
     const submitTodoHandler = async()=>{
         if(addTodo.name.length < 3) return toast.error("name is invalid")

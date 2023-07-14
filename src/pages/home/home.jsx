@@ -12,8 +12,10 @@ const Home = (props) => {
   const {user, setUser, setUserToken} = props;
   const [todo, setTodo] = useState([]);
   const [category, setCategory] = useState([])
-  const [active, setActive] = useState('none')
+  const [active, setActive] = useState('')
   const [addWin, setAddWin] = useState(false)
+  const [filter, setFilter] = useState("")
+  const [editItem, setEditItem] = useState("")
 
   const config = {
     method : "get",
@@ -31,7 +33,6 @@ const Home = (props) => {
         if(res.status==200){
           setCategory(res.data.categories)
           setTodo(res.data.todos)
-          console.log(res.data.todos[0]);
         }
       })
       .catch(error=>{
@@ -67,14 +68,26 @@ const Home = (props) => {
           setActive={setActive} 
           addWin={addWin}
           setAddWin={setAddWin}
+          filter={filter}
+          setFilter={setFilter}
           />
         <div className="todo-body mt-2">
           <Todos
             setTodo={setTodo}
-            todo={todo}/>
+            todo={todo}
+            active={active} 
+            setActive={setActive} 
+            filter={filter}
+            setFilter={setFilter}
+            editItem={editItem}
+            setEditItem={setEditItem}
+            />
         </div>
       </div>
-      <Edit/>
+      <Edit
+        editItem={editItem}
+        setEditItem={setEditItem}
+        />
     </>
   );
 };
