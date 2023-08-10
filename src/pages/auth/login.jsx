@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { filterEmail } from "../../config/filterInput";
@@ -28,8 +28,8 @@ const Login = ({ setUserToken, setUser }) => {
 
     const config = {
       method: "post",
-      url: `http://localhost:5500/api/auth`,
-      // url : `https://todo-list-19zv.onrender.com/api/auth`,
+      // url: `http://localhost:5500/api/auth`,
+      url: `https://todo-list-7u69.onrender.com/api/auth`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -64,7 +64,6 @@ const Login = ({ setUserToken, setUser }) => {
   return (
     <>
       <div className="container">
-        <ToastContainer />
         <div className="row">
           <div className="col-md-3 col-sm-1"></div>
           <div className="col-md-6 col-sm-10 align-items-center mt-5">

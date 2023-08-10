@@ -6,6 +6,7 @@ import Todos from "./components/todos";
 import axios from "axios";
 import { toast } from "react-toastify";
 import AddWindow from "./components/addWindow";
+import DeleteItem from "./components/deleteItem";
 
 const Home = (props) => {
   // eslint-disable-next-line react/prop-types
@@ -16,16 +17,16 @@ const Home = (props) => {
   const [addWin, setAddWin] = useState(false)
   const [filter, setFilter] = useState("")
   const [editItem, setEditItem] = useState("")
+  const [deleteItem, setDeleteItem] = useState("")
 
   const config = {
     method : "get",
-    url : `http://localhost:5500/api/todo/${localStorage.getItem('userId')}`,
+    url : `https://todo-list-7u69.onrender.com/api/todo/`,
     headers : {
        "Content-Type":"application/json", 
-       "x-auth-token": localStorage.getItem('authToken') 
+       "x-auth-token": localStorage.getItem('authToken')
     }
   }
- 
   const getData = async () =>{
     try{
       await axios(config)
@@ -39,7 +40,7 @@ const Home = (props) => {
         toast.error(error.response.data)
       })
     }catch(err){
-      toast.error(err.response.data)
+      toast.error(err)
     }
   }
 
@@ -81,12 +82,20 @@ const Home = (props) => {
             setFilter={setFilter}
             editItem={editItem}
             setEditItem={setEditItem}
+            deleteItem={deleteItem}
+            setDeleteItem={setDeleteItem}
             />
         </div>
       </div>
       <Edit
         editItem={editItem}
         setEditItem={setEditItem}
+        getData={getData}
+        />
+      <DeleteItem
+        deleteItem={deleteItem}
+        setDeleteItem={setDeleteItem}
+        getData={getData}
         />
     </>
   );

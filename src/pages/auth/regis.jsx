@@ -16,6 +16,7 @@ const Regis = ({setUserToken, setUser}) => {
   const inputHandler = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
+
   const formSubmit = async (e) => {
     e.preventDefault();
     if (
@@ -30,19 +31,14 @@ const Regis = ({setUserToken, setUser}) => {
     if (userData.password !== userData.rePass)
       return toast.error("Password and Conforim password not equil");
 
-      // axios.post('http://localhost:5500/api/user',{
-        //     name: userData.name,
-        //     email: userData.email,
-        //     password: userData.password
-        // },{
-          //   headers: { Authorization: `Bearer ${token}` }}
-          // )
       const config = {
         method : "post",
-        url : `http://localhost:5500/api/user`,
-        // url : `https://todo-list-19zv.onrender.com/api/user`,
+        // url : `http://localhost:5500/api/user`,
+        url : `https://todo-list-7u69.onrender.com/api/user`,
         headers : {
            "Content-Type":"application/json",  
+           'Access-Control-Allow-Origin' : '*',
+           'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
         },
         data : JSON.stringify({
           name: userData.name,

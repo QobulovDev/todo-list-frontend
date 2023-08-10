@@ -11,7 +11,7 @@ const AddCategory = (props) => {
     try {
       await axios.request({
         method: "post",
-        url: `http://localhost:5500/api/category`,
+        url: `https://todo-list-7u69.onrender.com/api/category`,
         headers: {
           "Content-Type": "application/json",
           "x-auth-token": localStorage.getItem("authToken"),

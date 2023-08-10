@@ -1,7 +1,9 @@
 import { useState } from "react";
+import {toast} from 'react-toastify';
+import axios from "axios";
 
 const Edit = (props) => {
-  const {editItem, setEditItem} = props;
+  const {editItem, setEditItem, getData} = props;
   if(!editItem) return <></>
   const [todoItem, setTodoItem] = useState({
     name: editItem.name,
@@ -14,6 +16,38 @@ const Edit = (props) => {
   }
   const closeWin = ()=>{
     setEditItem("")
+  }
+  const editHandler = async () => {
+    if(todoItem.name.length < 3) return toast.error("name is invalid")
+    if(!todoItem.status) return toast.error("status is invalid")
+    try {
+      await axios.request({
+          method : "put",
+          url : `https://todo-list-7u69.onrender.com/api/todo/${editItem._id}`,
+          headers : {
+          "Content-Type":"application/json", 
+          "x-auth-token": localStorage.getItem('authToken') 
+          },
+          data : JSON.stringify({
+              "userId": localStorage.getItem("userId"),
+              "name": todoItem.name,
+              "status": todoItem.status,
+              "didline": todoItem.didline,
+              "subitem": todoItem.subitem,
+              "categoryId": editItem.categoryId,
+          })
+      }).then(res=>{
+          if(res.status==200){
+              toast.success("todo added success")
+              closeWin()
+              getData()
+          }
+      }).catch(err=>{
+          toast.error(err.response.data)
+      })
+  } catch (error) {
+      toast.error(error.response.data)
+  }
   }
   return (
     <>
@@ -95,7 +129,7 @@ const Edit = (props) => {
               >
                 Close
               </button>
-              <button type="button" className="btn btn-primary">
+              <button type="button" className="btn btn-primary" onClick={editHandler}>
                 Save changes
               </button>
             </div>

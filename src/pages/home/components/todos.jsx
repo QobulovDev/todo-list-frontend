@@ -1,5 +1,5 @@
 const Todos = (props) => {
-  const {todo, active, filter, setEditItem} = props;
+  const {todo, active, filter, setEditItem, setDeleteItem} = props;
   const deleteTodo = (id)=>{
     console.log("delete", id);
   }
@@ -40,7 +40,7 @@ const Todos = (props) => {
                       background: 
                         (item.status=="complate")? "#0f0": 
                           (item.status=="todo")? "#ff0": 
-                            (item.status=="none")? "#adb5bd":"f00" }} className="btn">
+                            (item.status=="none")? "#adb5bd":"#f00" }} className="btn">
                       {item.status}
                     </div>
                   </td>
@@ -55,7 +55,7 @@ const Todos = (props) => {
                         </button>
                       </div>
                       <div className="col">
-                        <button className="btn btn-danger" onClick={()=>deleteTodo(item._id)}>
+                        <button className="btn btn-danger" onClick={()=>setDeleteItem(item)}>
                           <i className="bi bi-trash"></i>
                         </button>
                       </div>

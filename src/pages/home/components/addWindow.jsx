@@ -26,7 +26,7 @@ const AddWindow = ({ category, setCategory, addWin, setAddWin, getData }) => {
         try {
             await axios.request({
                 method : "post",
-                url : `http://localhost:5500/api/todo/`,
+                url : `https://todo-list-7u69.onrender.com/api/todo/`,
                 headers : {
                 "Content-Type":"application/json", 
                 "x-auth-token": localStorage.getItem('authToken') 

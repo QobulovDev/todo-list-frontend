@@ -1,5 +1,5 @@
 import { Suspense, lazy, useState } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import './App.css'
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,8 +19,8 @@ function App() {
               <Routes>
                 <Route path='/' element={
                   (userToken)?
-                    <Home user={user} setUser={setUser} setUserToken={setUserToken}/>:
-                    <Login setUserToken={setUserToken} setUser={setUser}/>
+                    <Home user={user} setUser={setUser} setUserToken={setUserToken}/>
+                    : <Navigate replace to="/login"/>
                 }/>
                 <Route path='/login' element={<Login setUserToken={setUserToken} setUser={setUser}/>}/>
                 <Route path='/regis' element={<Regis setUserToken={setUserToken} setUser={setUser}/>}/>
