@@ -38,7 +38,7 @@ const Edit = (props) => {
           })
       }).then(res=>{
           if(res.status==200){
-              toast.success("todo added success")
+              toast.success("todo edited success")
               closeWin()
               getData()
           }

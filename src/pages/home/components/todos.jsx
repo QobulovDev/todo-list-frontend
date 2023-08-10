@@ -1,9 +1,5 @@
 const Todos = (props) => {
   const {todo, active, filter, setEditItem, setDeleteItem} = props;
-  const deleteTodo = (id)=>{
-    console.log("delete", id);
-  }
-
   const todos = [];
   todo.forEach(element => {
     if(active && element._id!==active)

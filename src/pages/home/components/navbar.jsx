@@ -4,7 +4,7 @@ import profilImg from "../../../assets/profil.png";
 
 const Navbar = (props) => {
   // eslint-disable-next-line react/prop-types
-  const {setUser, user, setUserToken} = props;
+  const {setUser, user, setUserToken, setIsViewCateg} = props;
   const navigate = useNavigate()
   const logout = ()=>{
     setUser({})
@@ -65,6 +65,13 @@ const Navbar = (props) => {
                   </li>
                   <li className="list-group-item">
                     <Link to='/pofil'>Setting</Link>
+                  </li>
+                  <li className="list-group-item"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight"
+                    onClick={()=>setIsViewCateg(true)}>
+                    <div style={{color: '#00f', textDecoration: 'underline', cursor: 'pointer'}}>View category list</div>
                   </li>
                   <li className="list-group-item" onClick={logout}>
                     <a href="/">Log out</a>

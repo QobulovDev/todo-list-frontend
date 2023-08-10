@@ -7,6 +7,9 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import AddWindow from "./components/addWindow";
 import DeleteItem from "./components/deleteItem";
+import ViewCategory from "./components/viewCategory";
+import DeleteCategory from "./components/categoryAction/deleteCategory";
+import EditCategory from "./components/categoryAction/editCategory";
 
 const Home = (props) => {
   // eslint-disable-next-line react/prop-types
@@ -18,7 +21,10 @@ const Home = (props) => {
   const [filter, setFilter] = useState("")
   const [editItem, setEditItem] = useState("")
   const [deleteItem, setDeleteItem] = useState("")
+  const [isViewCateg, setIsViewCateg] = useState("")
 
+  const [deleteCategory, setDeleteCategory] = useState(); 
+  const [editCategory, setEditCategory] = useState(); 
   const config = {
     method : "get",
     url : `https://todo-list-7u69.onrender.com/api/todo/`,
@@ -59,7 +65,9 @@ const Home = (props) => {
       <Navbar
         user={user} 
         setUser={setUser} 
-        setUserToken={setUserToken}/>
+        setUserToken={setUserToken}
+        setIsViewCateg={setIsViewCateg}  
+      />
       <div className="container">
         <Category
           user={user}
@@ -96,6 +104,25 @@ const Home = (props) => {
         deleteItem={deleteItem}
         setDeleteItem={setDeleteItem}
         getData={getData}
+        />
+      <ViewCategory
+        isViewCateg={isViewCateg}
+        setIsViewCateg={setIsViewCateg}
+        category={category}
+        getData={getData}
+        setDeleteCategory={setDeleteCategory}
+        setEditCategory={setEditCategory}
+        />
+
+        <DeleteCategory
+            deleteCategory={deleteCategory} 
+            setDeleteCategory={setDeleteCategory}
+            getData={getData}
+            />
+        <EditCategory
+            editCategory={editCategory}
+            setEditCategory={setEditCategory}
+            getData={getData}
         />
     </>
   );
